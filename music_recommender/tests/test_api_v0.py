@@ -19,6 +19,15 @@ class MusicRecommenderApiTest(APITestCase):
         self.assertEqual(5, len(recommendations))
         self.assertEqual(response.status_code, 200)
 
+    """
+        def test_get_recommendation(self):
+        url = self.pre_http + reverse('artist_recommendation_api', kwargs={'artist': "die Ärzte", 'number': 5})
+        response = self.client.get(url)
+        recommendations = json.loads(response.content.decode("utf-8"))['recommendations']
+        self.assertEqual(5, len(recommendations))
+        self.assertEqual(response.status_code, 200)
+    """
+
     def test_get_artists(self):
         url = self.pre_http + reverse('artist_list_api')
         response = self.client.get(url)

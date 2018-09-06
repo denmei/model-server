@@ -5,3 +5,7 @@ urlpatterns = [
     url(r'^artist_list$',ArtistList.as_view(), name='artist_list_api'),
     url(r'^artist_recommendation$', get_recommendation, name='artist_recommendation_api'),
 ]
+"""
+url(r'^artist_list$', ArtistList.as_view(), name='artist_list_api'),
+    url(r'^artist_recommendation/(?P<artist>.*)/(?P<number>\d+)$', get_recommendation, name='artist_recommendation_api'),
+"""
