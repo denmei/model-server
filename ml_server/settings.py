@@ -25,7 +25,7 @@ SECRET_KEY = '1l(mw9tnub86j1wmf9pd1ony3d2y%5t10_7$sps)#-d%1*l3=c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [".herokuapp.com"]
+ALLOWED_HOSTS = [".herokuapp.com", "localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'music_recommender.apps.MusicRecommenderConfig'
+    'music_recommender.apps.MusicRecommenderConfig',
+    'index.apps.IndexConfig'
 ]
 
 MIDDLEWARE = [
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'ml_server.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        'DIRS': ['./templates', ]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
