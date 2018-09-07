@@ -31,6 +31,7 @@ ALLOWED_HOSTS = [".herokuapp.com", "localhost", "127.0.0.1"]
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,11 +40,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'music_recommender.apps.MusicRecommenderConfig',
     'rest_framework',
-    'corsheaders',
     'main.apps.MainConfig'
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_METHODS = (
+    'GET',
+    'POST',
+    'OPTIONS',
+)
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
