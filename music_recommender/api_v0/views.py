@@ -12,7 +12,7 @@ import unicodedata
 
 @api_view(['POST'])
 def get_recommendation(request):
-    data = request.data.dict()
+    data = request.data
     artist = data['artist']
     number = int(data['number'])
     response = dict(recommendations=get_artist_recommendations(artist, number))
