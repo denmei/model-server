@@ -7,6 +7,7 @@ from rest_framework import generics
 from music_recommender.models import Artist
 from music_recommender.api_v0.serializers import ArtistSerializer
 
+
 @api_view(['POST'])
 def get_recommendation(request):
     data = request.data
