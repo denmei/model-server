@@ -14,6 +14,22 @@ def get_artist_recommendations(artist_name, number=5):
     """
     number = min(20, number)
 
+    nn_model, data = get_model_data()
+
+    try:
+        dist, indices = nn_model.kneighbors(data.ix[artist_name].values.reshape(1, -1), n_neighbors=number+1)
+        results = []
+        for i in range(1, len(dist.flatten())):
+            artist_dict = dict()
+            artist_dict['name'] = data.index[indices[0][i]]
+            artist_dict['distance'] = dist.flatten()[i]
+            results += [artist_dict]
+    except KeyError:
+        results = []
+    return results
+
+
+def get_model_data():
     model_cache_key = 'recommender_cache'
     nn_model = cache.get(model_cache_key)  # get model from cache
 
@@ -33,14 +49,4 @@ def get_artist_recommendations(artist_name, number=5):
                                             values='artist_total_plays').fillna(0)
         cache.set(data_cache_key, data, None)  # save in the cache
 
-    try:
-        dist, indices = nn_model.kneighbors(data.ix[artist_name].values.reshape(1, -1), n_neighbors=number+1)
-        results = []
-        for i in range(1, len(dist.flatten())):
-            artist_dict = dict()
-            artist_dict['name'] = data.index[indices[0][i]]
-            artist_dict['distance'] = dist.flatten()[i]
-            results += [artist_dict]
-    except KeyError:
-        results = []
-    return results
+    return nn_model, data

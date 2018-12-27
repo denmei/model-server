@@ -11,3 +11,9 @@ class ArtistSerializer(serializers.ModelSerializer):
         model = Artist
         fields = '__all__'
 
+    def to_representation(self, instance):
+        """Convert `username` to lowercase."""
+        ret = super().to_representation(instance)
+        ret['name'] = ret['name'].title()
+        return ret
+
