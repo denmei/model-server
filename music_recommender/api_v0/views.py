@@ -6,9 +6,6 @@ from music_recommender.ml_model.recommender import get_artist_recommendations
 from rest_framework import generics
 from music_recommender.models import Artist
 from music_recommender.api_v0.serializers import ArtistSerializer
-from urllib.parse import unquote, quote
-import unicodedata
-
 
 @api_view(['POST'])
 def get_recommendation(request):
