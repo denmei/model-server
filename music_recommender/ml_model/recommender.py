@@ -21,7 +21,7 @@ def get_artist_recommendations(artist_name, number=5):
         results = []
         for i in range(1, len(dist.flatten())):
             artist_dict = dict()
-            artist_dict['name'] = data.index[indices[0][i]]
+            artist_dict['name'] = data.index[indices[0][i]].title()
             artist_dict['distance'] = dist.flatten()[i]
             results += [artist_dict]
     except KeyError:
@@ -37,6 +37,7 @@ def get_model_data():
     data = cache.get(data_cache_key)
 
     if nn_model is None:
+        print("Model None")
         # your model isn't in the cache
         # so `set` it
         model_path = os.path.join(BASE_DIR, "music_recommender/ml_model/nn_recommender.sav")
@@ -44,6 +45,7 @@ def get_model_data():
         cache.set(model_cache_key, nn_model, None)  # save in the cache
 
     if data is None:
+        print("Data None")
         data_path = os.path.join(BASE_DIR, "music_recommender/ml_model/wide_artist.csv")
         data = pd.read_csv(data_path).pivot(index='artist_name', columns='user_id',
                                             values='artist_total_plays').fillna(0)
